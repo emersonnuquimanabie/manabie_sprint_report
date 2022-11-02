@@ -120,9 +120,9 @@ if uploaded_file is not None:
     final_data['Story Points'] = final_data['Story Points'].fillna(0)  
     final_data["Duration(hours)"] = final_data["Duration(hours)"].fillna(np.nan)
     final_data["Duration(days)"] = final_data["Duration(days)"].fillna(np.nan)
-    final_data['Resolved'] = final_data['Resolved'].astype(str)
-    final_data['Created'] = final_data['Created'].astype(str)
-    final_data['Acknowledged'] = final_data['Acknowledged'].astype(str)
+    final_data['Resolved'] = final_data['Resolved'].astype(str).fillna(" ")
+    final_data['Created'] = final_data['Created'].astype(str).fillna(" ")
+    final_data['Acknowledged'] = final_data['Acknowledged'].astype(str).fillna(" ")
 
     final_data = final_data.drop(["Updated Date"], axis = 1)
     
