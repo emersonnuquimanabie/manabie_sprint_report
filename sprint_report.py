@@ -113,7 +113,7 @@ if uploaded_file is not None:
     final_data["Duration(hours)"] = (final_data["Resolved"] - final_data["Acknowledged"]).astype("timedelta64[h]")
     
     final_data['Status'] = np.select(conditions, choices, default="Not Completed")
-    final_data["Duration(days)"] = pd.to_numeric((final_data["Resolved"] - final_data["Acknowledged"]).dt.days.round(2), downcast='float')
+    final_data["Duration(days)"] = round(final_data["Duration(hours)"]/ 24 , 2)
     final_data = final_data[(final_data['Status'] == "Not Completed") |(final_data['Status'] == "Completed")]
 
     final_data['Assignee'] = final_data['Assignee'].fillna('Unassigned')
