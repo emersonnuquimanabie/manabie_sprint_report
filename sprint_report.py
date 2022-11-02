@@ -113,13 +113,17 @@ if uploaded_file is not None:
     final_data["Duration(hours)"] = (final_data["Resolved"] - final_data["Acknowledged"]).astype("timedelta64[h]")
     
     final_data['Status'] = np.select(conditions, choices, default="Not Completed")
-    final_data['Assignee'] = final_data['Assignee'].fillna('Unassigned')
-    final_data['Story Points'] = final_data['Story Points'].fillna(0)  
     final_data["Duration(days)"] = pd.to_numeric((final_data["Resolved"] - final_data["Acknowledged"]).dt.days, downcast='float')
     final_data = final_data[(final_data['Status'] == "Not Completed") |(final_data['Status'] == "Completed")]
+
+    final_data['Assignee'] = final_data['Assignee'].fillna('Unassigned')
+    final_data['Story Points'] = final_data['Story Points'].fillna(0)  
+    final_data["Duration(hours)"] = final_data["Duration(hours)"].fillna(np.nan)
+    final_data["Duration(days)"] = final_data["Duration(days)"].fillna(np.nan)
+
     final_data = final_data.drop(["Updated Date"], axis = 1)
     
-    #final_data.to_csv(squad + " Sprint "+ sprint_number +".csv", index=False)
+    
     st.dataframe(final_data)
     st.markdown(" ")
     st.markdown(" ")
