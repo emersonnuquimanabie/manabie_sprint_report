@@ -118,8 +118,8 @@ if uploaded_file is not None:
 
     final_data['Assignee'] = final_data['Assignee'].fillna('Unassigned')
     final_data['Story Points'] = final_data['Story Points'].fillna(0)  
-    final_data["Duration(hours)"] = final_data["Duration(hours)"].replace(-1,0).fillna("NA")
-    final_data["Duration(days)"] = final_data["Duration(days)"].clip(lower=0).fillna("NA")
+    final_data["Duration(hours)"] = final_data["Duration(hours)"].replace(-1,0).astype(str).fillna("NA")
+    final_data["Duration(days)"] = final_data["Duration(days)"].clip(lower=0).astype(str).fillna(np.nan)
     final_data['Resolved'] = final_data['Resolved'].fillna(" ").astype(str)
     final_data['Created'] = final_data['Created'].fillna(" ").astype(str)
     final_data['Acknowledged'] = final_data['Acknowledged'].fillna(" ").astype(str)
